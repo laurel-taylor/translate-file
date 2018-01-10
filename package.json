@@ -1,0 +1,27 @@
+{
+  "name": "translate-json-file",
+  "version": "1.0.0",
+  "description": "A utility to translate json files with google translate.",
+  "main": "translate.js",
+  "dependencies": {
+    "google-translate-api": "^2.3.0",
+    "immutable": "^3.8.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node translate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbrugg/translate-file.git"
+  },
+  "keywords": [
+    "translate"
+  ],
+  "author": "lbrugg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lbrugg/translate-file/issues"
+  },
+  "homepage": "https://github.com/lbrugg/translate-file#readme"
+}

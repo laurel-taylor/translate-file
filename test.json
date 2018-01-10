@@ -1,0 +1,11 @@
+{
+    "done": "Done {thing} and {thing}",
+    "cancel": "Cancel",
+    "saveExit": "Save & {thing} exit",
+    "nested": {
+        "nested": "something",
+        "moreNested": {
+            "another": "thing"
+        }
+    }
+}
