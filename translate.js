@@ -1,3 +1,5 @@
+// Example usage: node translate.js ./test.json es ./es-US.json
+
 const READ_FILE = process.argv[2] || './test.json';
 const NEW_LANGUAGE = process.argv[3] || 'es';
 const NEW_FILENAME = process.argv[4] ||'./es-US.json';
@@ -79,9 +81,4 @@ const processFile = () => {
 }
 
 processFile();
-// const teststr1 = "save {this} and {that}";
-// const translated = "save {something} and {something}";
-// const brackets = getBracketText(teststr1);
-// const unkeep = replaceBrackets(brackets, translated);
-// console.log(teststr1, brackets, unkeep, unkeep === teststr1);
 
