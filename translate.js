@@ -78,6 +78,7 @@ const replaceBrackets = (foundArr, text) => {
 }
 
 const processFile = () => {
+    console.log('Translating...');
     const promisesArray = [];
 
     const processObject = (path, obj) => {
