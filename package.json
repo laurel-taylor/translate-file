@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node translate.js"
+    "test": "node translate.js ./test.json es ./es-US.json",
+    "standard": "node translate.js ./en-us.json es ./es-us.json && node translate.js ./en-us.json ar ./ar-iq.json"
   },
   "repository": {
     "type": "git",

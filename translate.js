@@ -6,7 +6,6 @@ const NEW_FILENAME = process.argv[4] ||'./es-US.json';
 
 const translate = require('google-translate-api');
 const { Map } = require('immutable');
-const languageFile = require(READ_FILE);
 const fs = require('fs');
 
 let newFile = Map({});
@@ -78,7 +77,16 @@ const replaceBrackets = (foundArr, text) => {
 }
 
 const processFile = () => {
-    console.log('Translating...');
+    let languageFile;
+
+    try {
+        languageFile = require(READ_FILE);
+    } catch (e) {
+        console.error('ERROR: File', READ_FILE, 'not found. Exiting.');
+        return;
+    }
+
+    console.log('Translating', READ_FILE, 'to', NEW_LANGUAGE, '...');
     const promisesArray = [];
 
     const processObject = (path, obj) => {

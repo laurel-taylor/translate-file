@@ -12,6 +12,9 @@ node translate.js ./en-US.json es ./es-US.json
 node translate.js ./en-US.json ar ./ar-IQ.json
 ```
 
+### Shortcuts:
+`npm run standard` will translate `./en-us.json` into a `es-us.json` and `ar-iq.json` file.
+
 # Useful language codes
 [Supported Google translate language codes](https://cloud.google.com/translate/docs/languages)
 
