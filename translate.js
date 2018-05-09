@@ -17,7 +17,7 @@ const writeToFile = (contents) => {
             return console.log(err);
         }
 
-        console.log('The file was saved!', NEW_FILENAME);
+        console.log('The file was saved:', NEW_FILENAME);
     });
 };
 
@@ -31,9 +31,9 @@ const translatePhrase = (phrase, toLanguage) => {
     });
 };
 
-const getBracketText = (text) => {
+const getHtmlText = (text) => {
     const found = [];
-    const rxp = /{([^}]+)}/g;
+    const rxp = /<([^>]+)>/g;
     let curMatch;
 
     while( curMatch = rxp.exec( text ) ) {
@@ -43,10 +43,33 @@ const getBracketText = (text) => {
     return found;
 }
 
+const replaceHtml = (foundArr, text) => {
+    if (foundArr.length && text) {
+        let count = -1;
+        text = text.replace(/<(.*?)>/g, () => {
+            count++;
+            return `<${foundArr[count]}>`;
+        });
+    }
+    return text;
+}
+
+const getBracketText = (text) => {
+    const found = [];
+    const rxp = /{([^}]+)}/g;
+    let curMatch;
+
+    while( curMatch = rxp.exec( text ) ) {
+        found.push(curMatch[1]);
+    }
+
+    return found;
+}
+
 const replaceBrackets = (foundArr, text) => {
     if (foundArr.length && text) {
         let count = -1;
-        text = text.replace(/\{(.*?)\}/g, (thing) => {
+        text = text.replace(/\{(.*?)\}/g, () => {
             count++;
             return `{${foundArr[count]}}`;
         });
@@ -63,8 +86,11 @@ const processFile = () => {
 
             if (typeof phrase === 'string') {
                 const bracketArr = getBracketText(phrase);
+                const htmlArr = getHtmlText(phrase);
                 promisesArray.push(translatePhrase(phrase, NEW_LANGUAGE).then(text => {
-                    newFile = newFile.setIn([...path, key], replaceBrackets(bracketArr, text));
+                    let replacedText = replaceBrackets(bracketArr, text);
+                    replacedText = replaceHtml(htmlArr, replacedText);
+                    newFile = newFile.setIn([...path, key], replacedText);
                 }));
             } else {
                 processObject([...path, key], phrase);
@@ -75,8 +101,9 @@ const processFile = () => {
     processObject([], languageFile);
 
     Promise.all(promisesArray).then(() => {
-        console.log('done!', newFile.toJS());
-        writeToFile(JSON.stringify(newFile.toJS(), null, 4));
+        const jsFile = newFile.toJS();
+        // console.log(JSON.stringify(jsFile, null, 2));
+        writeToFile(JSON.stringify(jsFile, null, 4));
     });
 }
 

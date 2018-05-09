@@ -2,6 +2,8 @@
     "done": "Done {thing} and {thing}",
     "cancel": "Cancel",
     "saveExit": "Save & {thing} exit",
+    "nextToEachOther": "Mixing{0}lots{thing}of<span>stuff</span>.",
+    "html": "html has <span class=\"stuff\">stuff</span> and <span class=\"stuff\">things</span> ",
     "nested": {
         "nested": "something",
         "moreNested": {
